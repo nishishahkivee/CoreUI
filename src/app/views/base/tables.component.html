@@ -1,0 +1,64 @@
+<div class="animated fadeIn">   
+       
+   
+  <div class="row">
+    <div class="col-lg-2">
+      <span class="selectbox"><select class="form-control" [(ngModel)]="limit" name="limit" (change)="getRecord(1)">
+        <option value="2" selected>2</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>      
+    </select></span>
+    </div>
+    <div class="col-lg-4 mx-auto">      
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="name" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="name" name="name">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="search()">Search</button>
+        </div>
+      </div>
+      </div>
+  </div>
+      
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Striped Table
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col}}
+                </th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of list">
+                <td *ngFor="let col of index">
+                  {{user[col]}}
+                </td>
+                <td>
+                  <a [routerLink]="['/update/',user._id]"><i class="fa fa-edit"></i></a>
+                  <a (click) = "delete(user._id)"><i class="fa fa-trash"></i></a></td>                
+              </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-xs-12 col-12 d-sm-down-none">
+              <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="getRecord(2)" ></pagination>
+            </div>
+            
+          </div>           
+            
+          <button class="btn btn-primary">Back</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div> 
