@@ -13,6 +13,7 @@ import { PopoversComponent } from './popovers.component';
 import { ProgressComponent } from './progress.component';
 import { TooltipsComponent } from './tooltips.component';
 import { NavbarsComponent } from './navbars/navbars.component';
+import {  ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,13 @@ const routes: Routes = [
           title: 'Pagination'
         }
       },
+      {
+      path: 'profile/:id',
+      component: ProfileComponent,
+      data: {
+        title: 'Profile Page'
+      }
+    },
       {
         path: 'popovers',
         component: PopoversComponent,

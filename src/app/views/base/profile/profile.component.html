@@ -1,85 +1,9 @@
 
-<!-- <ul class="unstyled">
-    <li>name: {{result.name}}</li>
-    <li>email: {{result.email}}</li>
-    <li>mobile: {{result.mobile}}</li>
-    <li>role: {{result.role}}</li>
-</ul>
-<!-- <div class="app-body">    
-    <main class="main d-flex align-items-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7 mx-auto">
-            <div class="card mx-4">
-              <div class="card-body p-4">
-                <div *ngIf="!submitted">
-                <form class="form form-register" name="form">
-                  <h1>Update</h1>
-                  <p class="text-muted">Update your account</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control"  id="name" required [(ngModel)]="update.name" name="name" value={{result.name}}>
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">@</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Email" id="email" required [(ngModel)]="update.email" name="email" value={{result.email}}>
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="cnumber" id="mobile" required [(ngModel)]="update.mobile" name="mobile" value={{result.mobile}}>
-                  </div>                                    
-                  <button type="button" class="btn btn-block btn-success" (click)="updateUser()">Update Account</button>
-                  <button type="button" class="btn btn-block btn-success" (click)="delete()">delete Account</button>
-                </form>
-                </div>               
-              </div>              
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div> --> -->
-  
-  <div class="animated fadeIn">
+ <div class="row">
+ <img class="rounded-circle mx-auto mb-auto d-block" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
+data-holder-rendered="true"></div>
     <div class="row">
-      <div class="col-sm-9 mx-auto">
-    <div class="card">
-            
-      <div class="card-header align-items-center">
-       <h4 class="d-inline-block">Profile</h4>  
-       <button type="button" class="btn align-right btn-primary float-right"
-                (click)="isCollapsed = !isCollapsed">Toggle
-        </button>      
-      </div>
-      <div class="card-body justify-content-center"
-           (collapsed)="collapsed($event)"
-           (expanded)="expanded($event)"
-           [collapse]="isCollapsed">
-           <ul class="list-unstyled">
-            <li><h5 class="d-inline-block">Name: {{result.name}}</h5></li>
-            <li><h5 class="d-inline-block">Email: {{result.email}}</h5></li>
-            <li><h5 class="d-inline-block">Mobile: {{result.mobile}}</h5></li>
-            <li><h5 class="d-inline-block">Address: {{result.address}}</h5></li>
-            <li><h5 class="d-inline-block">Role: {{result.role}}</h5></li>
-            
-        </ul>
-      </div>
-      <div class="card-footer">
-        <button type="button" class="btn btn-primary"
-               [routerLink]="['/update/',result._id]">Edit Profile
-        </button>   
-      </div>
-      </div>
-      </div>
-    </div>
-    <!-- <div class="row">
-      <div class="col-sm-6 mx-auto">
+      <div class="col-sm-12 mx-auto">
         <div class="card">
           <div class="card-header">
            <h4> Update Profile</h4>
@@ -92,9 +16,7 @@
                     <span class="input-group-text">Username</span>
                   </div>
                   <input type="text" id="username3" name="username3" class="form-control" value={{result.name}} ([ngModel])="update.name">
-                  <div class="input-group-append">
-                    <span class="input-group-text"><i class="fa fa-user"></i></span>
-                  </div>
+                  
                 </div>
               </div>
               <div class="form-group">
@@ -102,10 +24,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Email</span>
                   </div>
-                  <input type="email" id="email3" name="email3" class="form-control" autocomplete="email" value={{result.email}} [(ngModel)]="update.email" name="email">
-                  <div class="input-group-append">
-                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                  </div>
+                  <input type="email" id="email3" name="email3" class="form-control" value={{result.email}} ([ngModel])="update.email">
+                 
                 </div>
               </div>
               <div class="form-group">
@@ -113,12 +33,30 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Mobile</span>
                   </div>
-                  <input type="text" id="mobile" name="mobile" class="form-control" autocomplete="mobile" value={{result.mobile}} ([ngModel])="update.name" name="mobile">
-                  <div class="input-group-append">
-                    <span class="input-group-text"><i class="fa fa-mobile-phone fa-lg"></i></span>
-                  </div>
+                  <input type="text" id="mobile" name="mobile" class="form-control" autocomplete="mobile" value={{result.mobile}} ([ngModel])="update.mobile" name="mobile">
+                 
                 </div>
               </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Address</span>
+                  </div>
+                  <textarea type="text" id="mobile" name="mobile" class="form-control" value={{result.address}} ([ngModel])="update.Address" name="mobile"></textarea>
+                  
+                </div>
+              </div>
+              <div class="input-group mb-3">   
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-user"></i></span>
+                </div>
+                <select id="select1" name="select1" class="form-control" [(ngModel)]="update.role" name="role" value="{{result.role}}">
+                  <option value="" disabled>Please select</option>
+                  <option value="user" selected>User</option>
+                  <option value="admin">admin</option>                      
+                </select>                
+              </div>       
+
               <div class="form-group form-actions">
                 <button type="submit" class="btn btn-sm btn-primary" (click)="updateUser()">Update</button>
               </div>
@@ -127,6 +65,6 @@
         </div>
       </div>
   
-    </div> -->
-  </div>
+    </div>
+
   

@@ -25,7 +25,7 @@ export class DefaultLayoutComponent {
   ngOnInit(): void {
     this.id = this.router.snapshot.paramMap.get('id');   
   }
-  onLogout(){        
+  onLogout(){         
     localStorage.removeItem("token");
     console.log(this.currentUser);  
     this.currentUser = null;   
@@ -34,6 +34,6 @@ export class DefaultLayoutComponent {
   }
 
   getProfile() {      
-      this.route.navigate(['/profile'])     
+      this.route.navigate(['/base/profile/' + localStorage.getItem('id')])     
   }
 }

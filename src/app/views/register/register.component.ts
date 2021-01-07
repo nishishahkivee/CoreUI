@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
     name: '',
     email: '',
     mobile: '',
+    address: '',
     role: '',
     password: '',
   };
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
       name:this.reg.name,
       email:this.reg.email,
       mobile:this.reg.mobile,
+      address:this.reg.address,
       role:this.reg.role,
       password:this.reg.password
     };
@@ -39,8 +41,5 @@ export class RegisterComponent implements OnInit {
         error => {
           console.log(error);          
         });  
-  }
-
- 
- 
+  } 
   }

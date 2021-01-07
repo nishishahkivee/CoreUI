@@ -8,7 +8,6 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { ProfileComponent } from './profile/profile.component';
 import { UpdateComponent } from './update/update.component';
 
 export const routes: Routes = [
@@ -45,13 +44,13 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    data: {
-      title: 'Profile Page'
-    }
-  },
+  // {
+  // //   path: 'profile',
+  // //   component: ProfileComponent,
+  // //   data: {
+  // //     title: 'Profile Page'
+  // //   }
+  // // },
   {
     path: 'update/:id',
     component: UpdateComponent,

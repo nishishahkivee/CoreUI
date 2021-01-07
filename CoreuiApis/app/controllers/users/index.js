@@ -3,10 +3,13 @@ const User = require('../../models/user');
 const bcrypt = require('bcryptjs');
 const { JWT_SECRET } = require('../../../config/default')
 const jwt = require('jsonwebtoken');
+const { USER } = require('../../constants/roles');
+
+
 const createUser = async (req, res) => {
   try {
     let { email } = req.body;
-    const user = await User.findOne({ email });;
+    const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
         message: `Username is already taken.`,
@@ -19,6 +22,7 @@ const createUser = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       mobile: req.body.mobile,
+      address: req.query.address,
       role: req.body.role,
       password: password
     });
@@ -29,9 +33,9 @@ const createUser = async (req, res) => {
       success: true
     });
   } catch (err) {
-    console.log(err);
+    console.log("err", err);
     return res.status(500).json({
-      message: "Unable to create your account.",
+      message: err,
       success: false
     });
   }
@@ -56,9 +60,10 @@ const loginUser = async (req, res) => {
       JWT_SECRET,
       { expiresIn: "7 days" }
     );
-    
+
     const resData = {
       token: `Bearer ${token}`,
+      id: user._id,
       email: user.email,
       name: user.name,
       role: user.role,
@@ -78,13 +83,32 @@ const loginUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res, next) => {
-  try {
-    const result = await User.find({}, { password: false }).lean();
-    res.json(result);
-  } catch (error) {
-    next(error);
+
+const getUsers = async (req, res) => {
+  var pageNo = parseInt(req.query.pageNo)
+  var size = parseInt(req.query.size)
+  var query = {}
+  var response;
+  if (pageNo < 0 || pageNo === 0) {
+    response = { "error": true, "message": "invalid page number, should start with 1" };
+    return res.json(response)
   }
+  query.skip = size * (pageNo - 1)
+  query.limit = size
+  User.count({}, function (err, totalCount) {
+    if (err) {
+      response = { "error": true, "message": "Error fetching data" }
+    }
+    User.find({}, {}, query, function (err, data) {
+      if (err) {
+        response = { "error": true, "message": "Error fetching data" };
+      } else {
+        var totalPages = Math.ceil(totalCount / size)
+        response = { "error": false, "message": data, "totalPages": totalPages };
+      }
+      res.json(response);
+    });
+  });
 };
 
 const getUserById = async (req, res, next) => {
@@ -107,6 +131,7 @@ const updateUser = (req, res) => {
     name: req.body.name,
     email: req.body.email,
     mobile: req.body.mobile,
+    address: req.body.address,
   }, { new: true })
     .then(user => {
       if (!user) {
@@ -121,7 +146,7 @@ const updateUser = (req, res) => {
     }).catch(err => {
       console.log(err);
       if (err.name === 'MongoError' && err.code === 11000) {
-        return res.status(409).send({       
+        return res.status(409).send({
           message: "Duplicate entry"
         });
       }
@@ -155,11 +180,59 @@ const deleteUser = async (req, res) => {
 
 const search = async (req, res) => {
   const searchfield = req.query.name || req.query.mobile;
+  console.log(searchfield);
   User.find({ $or: [{ 'name': { $regex: searchfield, $options: '$i' } }, { 'mobile': { $regex: searchfield, $options: '$i' } }] })
     .then(data => {
       res.send(data);
     })
 };
+
+
+const getdata = async (req, res, next) => {
+  try {
+    const {
+      page,
+      limit
+    } = req.query;
+    const option = {
+      page: parseInt(page, 10) || 1,
+      limit: parseInt(limit, 10) || 10,
+      sort: {
+        _id: -1
+      }
+    }    
+    var filter = req.query.filter ? {
+      'name': {
+        $regex: req.query.filter, $options: 'i'
+      }
+    } : filter;
+    User.paginate(filter, option).then(result => {
+      if (result.docs.length !== 0) {
+
+        res.status(200).json({
+          status: true,
+          statuscode: 200,
+          message: 'Data fetch Succesfully',
+          data: result
+        })
+      } else {
+
+        res.json({
+          status: true,
+          statuscode: 200,
+          message: 'No Records Found',
+          data: result
+        })
+      }
+    }).catch(err => {
+      err.name = 'getItems';
+      console.log(err);;
+    })
+  } catch (err) {
+    err.name = 'getItems';
+   console.log(err);;
+  }
+}
 
 const serializeUser = user => {
   return {
@@ -173,6 +246,10 @@ const serializeUser = user => {
     createdAt: user.createdAt
   };
 };
+
+
+
+
 module.exports = {
   serializeUser,
   createUser,
@@ -182,4 +259,6 @@ module.exports = {
   deleteUser,
   loginUser,
   search,
+  getdata
+
 };

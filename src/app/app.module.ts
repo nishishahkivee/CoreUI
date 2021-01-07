@@ -41,7 +41,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { ProfileComponent } from './profile/profile.component';
+// import { ProfileComponent } from './profile/profile.component';
 import { UpdateComponent } from './update/update.component';
 
 
@@ -69,7 +69,7 @@ import { UpdateComponent } from './update/update.component';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent,
+    // ProfileComponent,
     UpdateComponent,
    
   ],

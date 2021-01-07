@@ -2,7 +2,7 @@
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-9 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4">
               <div *ngIf="!submitted">
@@ -23,23 +23,41 @@
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                    <span class="input-group-text"><i class="fa fa-mobile-phone fa-lg"></i></span>
                   </div>
                   <input type="text" class="form-control" placeholder="cnumber" id="mobile" required [(ngModel)]="reg.mobile" name="mobile">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-address-card fa-lg"></i></span>
+                  </div>
+                  <textarea class="form-control" rows="2" placeholder="address" id="address" required [(ngModel)]="reg.address" name="address"></textarea>
+                </div>
+                <div class="input-group mb-3">   
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-address-card fa-lg"></i></span>
+                  </div>
+                  <select id="select1" name="select1" class="form-control" [(ngModel)]="reg.role" name="role">
+                      <option value="" selected disabled>Please select</option>
+                      <option value="user">User</option>
+                      <option value="admin">admin</option>                      
+                    </select>
+                  
+                </div>
+                <!-- <div class="input-group mb-3">
+                  <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
                   <input type="text" class="form-control" placeholder="role" id="role" required [(ngModel)]="reg.role" name="role">
-                </div>
+                </div> -->
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
                   <input type="password" class="form-control" placeholder="Repeat password" id="password" required [(ngModel)]="reg.password" name="password">
                 </div>
-                <button type="button" class="btn btn-block btn-success" (click)="submitForm()">Create Account</button>                
+                <button type="button" class="btn btn-block btn-success" (click)="submitForm()">Create Account</button> 
+                Already have account<a [routerLink]="['/login']">login</a>               
               </form>
               </div>
               <div *ngIf="submitted">

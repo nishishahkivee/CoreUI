@@ -5,8 +5,8 @@ const userCtrl = require('../controllers/users');
 const passport = require('passport');
 const userAuth = passport.authenticate("jwt", { session: false });
 const router = express.Router(); 
-const authorizer = require('../lib/authorize')  
-
+const authorizer = require('../lib/authorize');  
+const { User } = require('../lib/role');
 
 /**
  * @swagger
@@ -23,7 +23,7 @@ const authorizer = require('../lib/authorize')
  *       200:
  *         description: An array of Users 
  */ 
-router.get('/',authorizer('admin'), userCtrl.getUsers)
+router.post('/userData',authorizer('admin'), userCtrl.getUsers)
 
 /**
  * @swagger
@@ -60,7 +60,7 @@ router.get('/',authorizer('admin'), userCtrl.getUsers)
  *       '409':
  *         description: Duplicate entry'
  */
-router.post('/',userCtrl.createUser); 
+router.post('/register',userCtrl.createUser); 
 
  /**
  * @swagger
@@ -206,6 +206,17 @@ router.post("/login", async (req, res) => {
 */
 router.post("/profile" ,userAuth, async (req, res) => {
   return res.json(userCtrl.serializeUser(req.user));
+});
+
+router.post('/limit', async (req,res) => {
+  await userCtrl.getdata(req,res);
+});
+
+
+router.post('/logout', function(req, res){
+  req.logout();
+  res.json("logged out success")
+  res.redirect('/');
 });
 
 module.exports = router;

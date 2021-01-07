@@ -1,25 +1,24 @@
-<div class="animated fadeIn">   
-       
-   
+<div class="animated fadeIn">
   <div class="row">
     <div class="col-lg-2">
       <span class="selectbox"><select class="form-control" [(ngModel)]="limit" name="limit" (change)="getRecord(1)">
-        <option value="2" selected>2</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>      
-    </select></span>
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select></span>
     </div>
-    <div class="col-lg-4 mx-auto">      
+    <div class="col-lg-4 mx-auto">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="name" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="name" name="name">
+        <input type="text" class="form-control" placeholder="search" aria-label="Recipient's username"
+          aria-describedby="basic-addon2" [(ngModel)]="search" name="search">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" (click)="search()">Search</button>
+          <button class="btn btn-outline-secondary" type="button" (click)="getRecord(page)">Search</button>
         </div>
       </div>
-      </div>
+    </div>
   </div>
-      
+
   <div class="row">
     <div class="col-lg-8 mx-auto">
       <div class="card">
@@ -37,28 +36,43 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of list">
+              <tr *ngFor="let user of item">
                 <td *ngFor="let col of index">
                   {{user[col]}}
                 </td>
                 <td>
                   <a [routerLink]="['/update/',user._id]"><i class="fa fa-edit"></i></a>
-                  <a (click) = "delete(user._id)"><i class="fa fa-trash"></i></a></td>                
+                  <a (click)="delete(user._id)"><i class="fa fa-trash"></i></a>
+                </td>
               </tr>
             </tbody>
           </table>
-          <div class="row">
-            <div class="col-xs-12 col-12 d-sm-down-none">
-              <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="getRecord(2)" ></pagination>
+          <div class="col-lg-12" *ngIf="total.totalPages > 1">
+
+            <div class="bootstrap-pagination">
+              <nav>
+                <ul class="pagination justify-content-center">
+                  <li *ngIf="total.hasPrevPage == 1" class="page-item" (click)="getRecord(total.prevPage)"><a
+                      *ngIf="total.prevPage!=null" class="page-link" href="javascript:void(0)"
+                      tabindex="-1">Previous</a>
+                  </li>
+                  <li *ngIf="total.prevPage!=null" class="page-item" (click)="getRecord(total.prevPage)"><a
+                      class="page-link" href="javascript:void(0)">{{total.prevPage}}</a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="javascript:void(0)">{{total.page}}</a>
+                  </li>
+                  <li *ngIf="total.nextPage!=null" class="page-item" (click)="getRecord(total.nextPage)"><a
+                      class="page-link" href="javascript:void(0)">{{total.nextPage}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="total.hasNextPage == 1" (click)="getRecord(total.nextPage)"><a
+                      *ngIf="total.nextPage!=null" class="page-link" href="javascript:void(0)">Next</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
-            
-          </div>           
-            
-          <button class="btn btn-primary">Back</button>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
-
-</div> 
+</div>

@@ -16,7 +16,9 @@ export class ProfileComponent implements OnInit {
   update = {
     name: '',
     email: '',
-    mobile: '',        
+    mobile: '',
+    address: '',
+    role: ''      
   };
   constructor(private service:CommonServiceService, public route:ActivatedRoute,private http:HttpClient,public router:Router) { 
     this.id = this.route.snapshot.paramMap.get('id');
@@ -39,7 +41,9 @@ export class ProfileComponent implements OnInit {
     const data = {
       name:this.update.name,
       email:this.update.email,
-      mobile:this.update.mobile,      
+      mobile:this.update.mobile,
+      address:this.update.address,
+      role:this.update.role    
           
     };
     console.log(data);

@@ -2,7 +2,7 @@
     <main class="main d-flex align-items-center">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 mx-auto">
+          <div class="col-md-9 mx-auto">
             <div class="card mx-4">
               <div class="card-body p-4">
                 <div *ngIf="!submitted">
@@ -23,10 +23,27 @@
                   </div>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                      <span class="input-group-text"><i class="fa fa-mobile fa-lg"></i></span>
                     </div>
                     <input type="text" class="form-control" placeholder="cnumber" id="mobile" required [(ngModel)]="update.mobile" name="mobile">
-                  </div>                                    
+                  </div> 
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                    </div>
+                    <textarea class="form-control" rows="2" placeholder="address" id="address" required [(ngModel)]="update.address" name="address"></textarea>
+                  </div>   
+                  <div class="input-group mb-3">   
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <select id="select1" name="select1" class="form-control" [(ngModel)]="update.role" name="role">
+                      <option value="">Please select</option>
+                      <option value="user" selected>User</option>
+                      <option value="admin">admin</option>                      
+                    </select>
+                    
+                  </div>                                  
                   <button type="button" class="btn btn-block btn-success" (click)="updateUser()">Update Account</button>
                 </form>
                 </div>               

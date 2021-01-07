@@ -49,7 +49,7 @@ export class CommonServiceService {
    return this.http.get(environment.api_url +`/search?name=${name}`);
  } 
 
- getRecord(limit,page) {
-  return this.http.post(environment.api_url +`/limit?limit=${limit},page=${page}`,null);
+ getRecord(limit,page,filter) {
+  return this.http.post(environment.api_url +`/limit?limit=${limit}&page=${page}&filter=${filter}`,null);
 }
 }

@@ -14,6 +14,7 @@ export class UpdateComponent implements OnInit {
     email: '',
     mobile: '',    
   };
+  submitted = false;
   constructor(private service:CommonServiceService,public route:Router,public router:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class UpdateComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);         
+          this.submitted = true; 
           this.route.navigate(['/profile']);
         },
         error => {
